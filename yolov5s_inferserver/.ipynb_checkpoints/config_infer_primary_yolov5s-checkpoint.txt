@@ -1,0 +1,61 @@
+infer_config {
+  unique_id: 5
+  gpu_ids: [0]
+  max_batch_size: 1
+  backend {
+    trt_is {
+      model_name: "yolov5s"
+      version: -1
+      model_repo {
+        root: "."
+        log_level: 2
+        strict_model_config: false
+        tf_gpu_memory_fraction: 0.35
+        tf_disable_soft_placement: 0
+        # Triton runtime would reserve 64MB pinned memory
+        pinned_memory_pool_byte_size: 67108864
+        # Triton runtim would reserve 64MB CUDA device memory on GPU 0
+        cuda_device_memory { device: 0, memory_pool_byte_size: 67108864 }
+      }
+    }
+  }
+
+  preprocess {
+    network_format: IMAGE_FORMAT_RGB
+    tensor_order: TENSOR_ORDER_LINEAR
+    maintain_aspect_ratio: 1
+    frame_scaling_hw: FRAME_SCALING_HW_DEFAULT
+    frame_scaling_filter: 1
+    normalize {
+      scale_factor: 0.0039215697906911373
+      channel_offsets: [0, 0, 0]
+    }
+  }
+
+  postprocess {
+    labelfile_path: "./yolov5s/labels.txt"
+    detection {
+      num_detected_classes: 80
+      custom_parse_bbox_func: "NvDsInferParseCustomYoloV5"
+      nms {
+        confidence_threshold: 0.6
+        iou_threshold: 0.4
+        topk : 10
+      }
+    }
+  }
+
+  extra {
+    copy_input_to_host_buffers: false
+  }
+
+  custom_lib {
+    path: "./nvdsinfer_custom_impl_Yolo/build/libnvdsinfer_custom_impl_Yolo.so"
+  }
+}
+input_control {
+  process_mode: PROCESS_MODE_FULL_FRAME
+  interval: 1
+}
+
+output_control { output_tensor_meta : true }

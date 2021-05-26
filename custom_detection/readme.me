@@ -1,0 +1,10 @@
+link video test: https://drive.google.com/file/d/1PA_KtiXwdAH8H8FIsPsPm0gECSsMHhm6/view?usp=sharing
+
+$ rm -rf build
+$ mkdir -p deepstream/nvdsinfer_custom_impl_Yolo/build
+$ cd deepstream/nvdsinfer_custom_impl_Yolo/build
+$ cmake -DCMAKE_TOOLKIT_CHAIN=../../x86_64-toolchain.cmake ..
+$ make
+
+
+rm -rf build && mkdir build && cd build && cmake -DCMAKE_TOOLKIT_CHAIN=../../../x86_64-toolchain.cmake .. && make && cd ..

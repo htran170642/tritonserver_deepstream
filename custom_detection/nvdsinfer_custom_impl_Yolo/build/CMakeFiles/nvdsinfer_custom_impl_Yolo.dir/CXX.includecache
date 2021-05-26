@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/opt/nvidia/deepstream/deepstream-5.1/samples/configs/deepstream-app-trtis/pet_detection/nvdsinfer_custom_impl_Yolo/nvdsparsebbox_Yolo.cpp
+algorithm
+-
+cassert
+-
+cmath
+-
+cstring
+-
+fstream
+-
+iostream
+-
+unordered_map
+-
+nvdsinfer_custom_impl.h
+/opt/nvidia/deepstream/deepstream-5.1/samples/configs/deepstream-app-trtis/pet_detection/nvdsinfer_custom_impl_Yolo/nvdsinfer_custom_impl.h
+map
+-
+
+/opt/nvidia/deepstream/deepstream/sources/includes/nvdsinfer.h
+stdint.h
+-
+
+/opt/nvidia/deepstream/deepstream/sources/includes/nvdsinfer_custom_impl.h
+string
+-
+vector
+-
+NvCaffeParser.h
+/opt/nvidia/deepstream/deepstream/sources/includes/NvCaffeParser.h
+NvUffParser.h
+/opt/nvidia/deepstream/deepstream/sources/includes/NvUffParser.h
+nvdsinfer.h
+/opt/nvidia/deepstream/deepstream/sources/includes/nvdsinfer.h
+
